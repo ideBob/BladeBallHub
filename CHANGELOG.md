@@ -2,6 +2,21 @@
 
 All notable changes to BladeBallHub are documented in this file.
 
+## [1.2.0] — 2026-08
+
+### Architecture
+- Modular feature objects (`Enable` / `Disable` / `Cleanup`) with isolated internal state
+- `SafeCall` + structured `Logger` (DEBUG / INFO / WARN / ERROR)
+- Idempotent `ConnectionManager` and global `Unload`
+- Validated `Config` with ranges and safe defaults
+- Centralized `References` layer for remotes and ball folders
+- One feature failure no longer takes down the hub
+
+### Reliability
+- Deterministic toggles (enable twice does not duplicate connections)
+- Character respawn re-binds only what is needed
+- Full cleanup on window destroy
+
 ## [1.1.0] — 2026
 
 ### Added
