@@ -59,6 +59,12 @@ See [WindUI](https://github.com/Footagesus/WindUI) for library documentation.
 
 The UI window opens with **Main**, **Parry**, and **UI THEME / COLOR CHANGER** tabs.
 
+## Website
+
+Official landing page lives in [`website/`](website/) and deploys automatically to GitHub Pages:
+
+**https://idebob.github.io/BladeBallHub/**
+
 ## Repository Layout
 
 ```text
@@ -67,6 +73,12 @@ BladeBallHub/
 ├── .gitignore
 ├── src/
 │   └── BladeBallHub.lua      # Complete executable hub
+├── website/
+│   ├── index.html
+│   ├── css/style.css
+│   ├── js/script.js
+│   └── assets/
+├── .github/workflows/pages.yml
 ├── config/
 │   └── Config.lua            # Shared default configuration
 └── docs/
