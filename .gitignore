@@ -1,0 +1,34 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local secrets / credentials (never commit)
+.env
+.env.*
+*.pem
+*.key
+secrets/
+credentials/
+tokens/
+
+# Executor / local dumps
+*.log
+*.tmp
+*.bak
+
+# Optional local WindUI mirror (prefer remote loadstring)
+lib/WindUI.lua
+lib/windui/
+
+# Build / package artifacts
+dist/
+build/
+node_modules/
