@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <rect x="32" y="32" width="448" height="448" rx="48" fill="#121216" stroke="#8B5CF6" stroke-width="6"/>
+  <path d="M256 140 L274 200 L264 200 L264 320 L248 320 L248 200 L238 200 Z" fill="#8B5CF6"/>
+  <ellipse cx="256" cy="335" rx="28" ry="16" fill="#A78BFA"/>
+  <text x="256" y="400" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700" fill="#FAFAFA">BBH</text>
+</svg>
