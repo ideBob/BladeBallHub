@@ -2,7 +2,7 @@
 
 Blade Ball Luau Script Hub built with **WindUI**.
 
-A modular, production-oriented script hub for Roblox *Blade Ball* featuring Auto Parry, Auto Dash, Ball Tracker, ESP, and common quality-of-life utilities.
+A modular, production-oriented script hub for Roblox *Blade Ball* featuring Auto Parry, Auto Dash, Ball Tracker, ESP, theme switching, and common quality-of-life utilities.
 
 ## Features
 
@@ -21,11 +21,16 @@ A modular, production-oriented script hub for Roblox *Blade Ball* featuring Auto
 - **Ball Tracker** — live overlay (speed, distance, approaching, ETA)
 - Configurable: Parry Distance, Reaction Time, Prediction Strength, Min Ball Speed, Max Distance, Dash Distance
 
+### UI THEME / COLOR CHANGER
+- **Select Theme** dropdown: Lavender, Purple, Violet, White, **Black** (default)
+- Runtime `WindUI:SetTheme` — no UI rebuild, does not reset features
+
 ## Architecture
 
 - Centralized **State** and **Config** tables
 - **Connection manager** — track/disconnect all event connections on feature disable or UI destroy
 - **BallController** — single source of truth for the active ball
+- Custom themes via `WindUI:AddTheme` / `WindUI:SetTheme`
 - Feature isolation via `pcall` so one failure does not crash the hub
 - Capability detection for executor-specific APIs
 - Full cleanup on `Window:OnDestroy`
@@ -52,7 +57,7 @@ See [WindUI](https://github.com/Footagesus/WindUI) for library documentation.
 2. Inject your preferred executor.
 3. Execute the contents of [`src/BladeBallHub.lua`](src/BladeBallHub.lua).
 
-The UI window opens with **Main** and **Parry** tabs. Toggle features and adjust sliders as needed.
+The UI window opens with **Main**, **Parry**, and **UI THEME / COLOR CHANGER** tabs.
 
 ## Repository Layout
 

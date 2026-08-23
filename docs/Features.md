@@ -82,6 +82,28 @@ UI updates are throttled (~12.5 Hz) to reduce overhead.
 
 ---
 
+## UI THEME / COLOR CHANGER Tab
+
+### Select Theme
+Dropdown with exactly five options:
+
+| Theme | Style |
+|-------|--------|
+| **Lavender** | Soft lavender accents on deep purple-gray |
+| **Purple** | Rich purple / magenta accents |
+| **Violet** | Deep violet dark theme |
+| **White** | Light background, dark text |
+| **Black** | Near-black UI (default) |
+
+Behavior:
+- Themes are registered with `WindUI:AddTheme` before the window is created
+- Selection calls `WindUI:SetTheme(name)` at runtime (no UI rebuild)
+- Does **not** reset or interfere with Main / Parry feature state
+- Failures are caught with `pcall` and notified; active theme is left unchanged
+- Default on load: **Black**
+
+---
+
 ## Ball Detection
 
 `BallController` watches `Workspace.Balls` (and `TrainingBalls` if present):

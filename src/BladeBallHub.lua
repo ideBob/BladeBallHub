@@ -3,6 +3,7 @@
     Full production Luau script
     Architecture: centralized state, connection manager, ball controller,
     feature isolation, capability detection, proper cleanup.
+    Themes: Lavender, Purple, Violet, White, Black (default Black)
 ]]
 
 local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
@@ -47,6 +48,7 @@ local State = {
     AutoDash      = false,
     BallTracker   = false,
     DebugMode     = false,
+    CurrentTheme  = "Black",
 }
 
 local Config = {
@@ -119,6 +121,130 @@ local function IsAlive(char)
     return hum and hum.Health > 0 and hum.Parent ~= nil
 end
 
+--//==========================================================================
+--// CUSTOM THEMES (WindUI AddTheme / SetTheme)
+--//==========================================================================
+local ThemeNames = { "Lavender", "Purple", "Violet", "White", "Black" }
+
+local Themes = {
+    Lavender = {
+        Name        = "Lavender",
+        Accent      = Color3.fromHex("#2a2438"),
+        Background  = Color3.fromHex("#1a1625"),
+        Dialog      = Color3.fromHex("#221c30"),
+        Outline     = Color3.fromHex("#c4b5fd"),
+        Text        = Color3.fromHex("#f3e8ff"),
+        Placeholder = Color3.fromHex("#a78bfa"),
+        Button      = Color3.fromHex("#3b3154"),
+        Icon        = Color3.fromHex("#c4b5fd"),
+        Toggle      = Color3.fromHex("#a78bfa"),
+        Slider      = Color3.fromHex("#a78bfa"),
+        Checkbox    = Color3.fromHex("#a78bfa"),
+        Primary     = Color3.fromHex("#8b5cf6"),
+    },
+    Purple = {
+        Name        = "Purple",
+        Accent      = Color3.fromHex("#1f1230"),
+        Background  = Color3.fromHex("#120a1f"),
+        Dialog      = Color3.fromHex("#1a1028"),
+        Outline     = Color3.fromHex("#c084fc"),
+        Text        = Color3.fromHex("#faf5ff"),
+        Placeholder = Color3.fromHex("#a855f7"),
+        Button      = Color3.fromHex("#3b0764"),
+        Icon        = Color3.fromHex("#d8b4fe"),
+        Toggle      = Color3.fromHex("#a855f7"),
+        Slider      = Color3.fromHex("#c026d3"),
+        Checkbox    = Color3.fromHex("#a855f7"),
+        Primary     = Color3.fromHex("#9333ea"),
+    },
+    Violet = {
+        Name        = "Violet",
+        Accent      = Color3.fromHex("#1a1030"),
+        Background  = Color3.fromHex("#0f0a1c"),
+        Dialog      = Color3.fromHex("#161028"),
+        Outline     = Color3.fromHex("#8b5cf6"),
+        Text        = Color3.fromHex("#ede9fe"),
+        Placeholder = Color3.fromHex("#7c3aed"),
+        Button      = Color3.fromHex("#2e1065"),
+        Icon        = Color3.fromHex("#a78bfa"),
+        Toggle      = Color3.fromHex("#7c3aed"),
+        Slider      = Color3.fromHex("#6d28d9"),
+        Checkbox    = Color3.fromHex("#7c3aed"),
+        Primary     = Color3.fromHex("#5b21b6"),
+    },
+    White = {
+        Name        = "White",
+        Accent      = Color3.fromHex("#f4f4f5"),
+        Background  = Color3.fromHex("#ffffff"),
+        Dialog      = Color3.fromHex("#fafafa"),
+        Outline     = Color3.fromHex("#a1a1aa"),
+        Text        = Color3.fromHex("#18181b"),
+        Placeholder = Color3.fromHex("#71717a"),
+        Button      = Color3.fromHex("#e4e4e7"),
+        Icon        = Color3.fromHex("#3f3f46"),
+        Toggle      = Color3.fromHex("#52525b"),
+        Slider      = Color3.fromHex("#3f3f46"),
+        Checkbox    = Color3.fromHex("#52525b"),
+        Primary     = Color3.fromHex("#27272a"),
+    },
+    Black = {
+        Name        = "Black",
+        Accent      = Color3.fromHex("#121212"),
+        Background  = Color3.fromHex("#0a0a0a"),
+        Dialog      = Color3.fromHex("#111111"),
+        Outline     = Color3.fromHex("#3f3f46"),
+        Text        = Color3.fromHex("#fafafa"),
+        Placeholder = Color3.fromHex("#71717a"),
+        Button      = Color3.fromHex("#1c1c1c"),
+        Icon        = Color3.fromHex("#a1a1aa"),
+        Toggle      = Color3.fromHex("#e4e4e7"),
+        Slider      = Color3.fromHex("#d4d4d8"),
+        Checkbox    = Color3.fromHex("#e4e4e7"),
+        Primary     = Color3.fromHex("#fafafa"),
+    },
+}
+
+local function RegisterThemes()
+    for _, name in ipairs(ThemeNames) do
+        local theme = Themes[name]
+        if theme then
+            local ok, err = pcall(function()
+                WindUI:AddTheme(theme)
+            end)
+            if not ok then
+                warn("[BladeBall Hub] Failed to register theme", name, err)
+            end
+        end
+    end
+end
+
+local function ApplyTheme(themeName)
+    if type(themeName) ~= "string" or not Themes[themeName] then
+        Notify("Theme", "Unknown theme: " .. tostring(themeName), 3)
+        Debug("ApplyTheme rejected invalid name:", themeName)
+        return false
+    end
+
+    local ok, result = pcall(function()
+        return WindUI:SetTheme(themeName)
+    end)
+
+    if not ok then
+        warn("[BladeBall Hub] SetTheme error:", result)
+        Notify("Theme", "Could not apply theme (" .. themeName .. ")", 4)
+        Debug("SetTheme failed:", result)
+        return false
+    end
+
+    -- Some WindUI builds return nil on success; treat successful pcall as applied
+    State.CurrentTheme = themeName
+    Debug("Theme applied:", themeName)
+    Notify("Theme", "Applied: " .. themeName, 2)
+    return true
+end
+
+RegisterThemes()
+
 --// Ball Controller (centralized)
 local BallController = {
     CurrentBall = nil,
@@ -140,7 +266,6 @@ local function FindRealBall(folder)
             return child
         end
     end
-    -- fallback: any BasePart with velocity / target attribute
     for _, child in ipairs(folder:GetChildren()) do
         if child:IsA("BasePart") and (child:GetAttribute("target") ~= nil or child.AssemblyLinearVelocity.Magnitude > 5) then
             return child
@@ -216,7 +341,6 @@ local function PredictImpact(ballPos, ballVel, playerPos, playerVel, strength)
     local approaching = relativePos:Dot(relativeVel) < 0
     local timeToImpact = relativePos.Magnitude / speed
     if approaching then
-        -- more accurate projected time using closing speed
         local closing = -relativePos.Unit:Dot(relativeVel)
         if closing > 0.5 then
             timeToImpact = relativePos.Magnitude / closing
@@ -225,7 +349,7 @@ local function PredictImpact(ballPos, ballVel, playerPos, playerVel, strength)
     return relativePos.Magnitude, approaching, timeToImpact
 end
 
---// Parry Fire (multiple methods for compatibility)
+--// Parry Fire
 local lastParryTime = 0
 local function FireParry()
     local now = tick()
@@ -234,7 +358,6 @@ local function FireParry()
 
     local success = false
 
-    -- Method 1: Remote
     pcall(function()
         local remotes = ReplicatedStorage:FindFirstChild("Remotes")
         if remotes then
@@ -246,7 +369,6 @@ local function FireParry()
         end
     end)
 
-    -- Method 2: VirtualInput (mouse click)
     if not success then
         pcall(function()
             VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
@@ -260,7 +382,6 @@ local function FireParry()
 end
 
 --// Feature: Infinite Jump
-local jumpConn
 local function SetInfiniteJump(enabled)
     State.InfiniteJump = enabled
     Disconnect("InfiniteJump")
@@ -293,7 +414,6 @@ end
 
 --// Feature: No Fog
 local originalFog = {}
-local fogConn
 local function CaptureFog()
     originalFog = {
         FogEnd      = Lighting.FogEnd,
@@ -306,6 +426,7 @@ end
 local function SetNoFog(enabled)
     State.NoFog = enabled
     Disconnect("NoFog")
+    Disconnect("NoFog2")
     if not enabled then
         pcall(function()
             if originalFog.FogEnd then Lighting.FogEnd = originalFog.FogEnd end
@@ -380,7 +501,7 @@ local function SetFullBright(enabled)
     Notify("Full Bright", "Enabled")
 end
 
---// Feature: Remove Jitter (lightweight camera stabilization)
+--// Feature: Remove Jitter
 local function SetRemoveJitter(enabled)
     State.RemoveJitter = enabled
     Disconnect("RemoveJitter")
@@ -389,14 +510,12 @@ local function SetRemoveJitter(enabled)
         return
     end
 
-    -- Non-aggressive: only dampen extreme camera snaps, never force CFrame every frame
     local lastCF = Camera.CFrame
-    Track("RemoveJitter", RunService.RenderStepped:Connect(function(dt)
+    Track("RemoveJitter", RunService.RenderStepped:Connect(function()
         if not State.RemoveJitter then return end
         local current = Camera.CFrame
         local delta = (current.Position - lastCF.Position).Magnitude
         if delta > 8 and delta < 40 then
-            -- soft blend only on suspicious spikes
             Camera.CFrame = lastCF:Lerp(current, 0.55)
         end
         lastCF = Camera.CFrame
@@ -404,7 +523,7 @@ local function SetRemoveJitter(enabled)
     Notify("Remove Jitter", "Enabled")
 end
 
---// Feature: RakNet Desync (experimental, capability-gated)
+--// Feature: RakNet Desync
 local function SetRakNetDesync(enabled)
     State.RakNetDesync = enabled
     Disconnect("RakNetDesync")
@@ -420,8 +539,6 @@ local function SetRakNetDesync(enabled)
     end
 
     local ok, err = pcall(function()
-        -- Placeholder for executor-specific networking hooks.
-        -- Intentionally isolated; does nothing destructive if APIs are missing.
         Debug("RakNet Desync attempted (experimental)")
     end)
     if not ok then
@@ -437,7 +554,7 @@ local ESPFolder = Instance.new("Folder")
 ESPFolder.Name = "BladeBallESP"
 ESPFolder.Parent = CoreGui
 
-local espObjects = {} -- [player] = {highlight, billboard, ...}
+local espObjects = {}
 
 local function ClearESPFor(player)
     local data = espObjects[player]
@@ -585,10 +702,8 @@ local function AutoParryStep()
     if distance > Config.MaximumBallDistance then return end
     if not approaching then return end
 
-    -- Target check (common in Blade Ball)
     local target = ball:GetAttribute("target")
     if target and target ~= LocalPlayer.Name and target ~= LocalPlayer.DisplayName then
-        -- still allow if extremely close
         if distance > Config.ParryDistance * 0.6 then return end
     end
 
@@ -648,7 +763,6 @@ local function AutoDashStep()
     if eta > 0.45 then return end
 
     lastDash = now
-    -- Dash: apply impulse away from ball
     local away = (hrp.Position - ball.Position)
     if away.Magnitude < 0.1 then
         away = hrp.CFrame.LookVector
@@ -661,7 +775,6 @@ local function AutoDashStep()
         hrp.AssemblyLinearVelocity = dashDir * 55 + Vector3.new(0, 12, 0)
     end)
 
-    -- Also try common dash remote / ability if present
     pcall(function()
         local remotes = ReplicatedStorage:FindFirstChild("Remotes")
         if remotes then
@@ -705,7 +818,6 @@ local function SetBallTracker(enabled)
         return
     end
 
-    -- Simple CoreGui overlay for tracker (WindUI Paragraph is static; live values need custom)
     local screen = Instance.new("ScreenGui")
     screen.Name = "BallTrackerGui"
     screen.ResetOnSpawn = false
@@ -745,7 +857,7 @@ local function SetBallTracker(enabled)
     Track("BallTracker", RunService.Heartbeat:Connect(function()
         if not State.BallTracker then return end
         local now = tick()
-        if now - lastUpdate < 0.08 then return end -- throttle UI
+        if now - lastUpdate < 0.08 then return end
         lastUpdate = now
 
         local ball = BallController.CurrentBall
@@ -789,7 +901,6 @@ local function FullCleanup()
     ClearAllESP()
     pcall(function() ESPFolder:Destroy() end)
 
-    -- Restore lighting
     pcall(function()
         for k, v in pairs(originalLighting) do
             Lighting[k] = v
@@ -807,18 +918,20 @@ local function FullCleanup()
     end
 end
 
---// UI Construction
+--// UI Construction (default theme: Black)
 local Window = WindUI:CreateWindow({
     Title  = "Blade Ball Hub",
     Icon   = "swords",
     Author = "WindUI • Production",
     Folder = "BladeBallHub",
     Size   = UDim2.fromOffset(560, 420),
-    Theme  = "Dark",
+    Theme  = "Black",
     Resizable = true,
     Transparent = true,
     SideBarWidth = 160,
 })
+
+State.CurrentTheme = "Black"
 
 Window:OnDestroy(function()
     FullCleanup()
@@ -1014,13 +1127,38 @@ ParryTab:Slider({
     end,
 })
 
+--// UI THEME / COLOR CHANGER Tab
+local ThemeTab = Window:Tab({
+    Title = "UI THEME / COLOR CHANGER",
+    Icon  = "palette",
+})
+
+ThemeTab:Dropdown({
+    Title = "Select Theme",
+    Desc  = "Applies to the entire WindUI interface",
+    Values = ThemeNames,
+    Value = "Black",
+    Callback = function(selected)
+        -- Isolated: does not touch Main/Parry feature state or connections
+        local name = selected
+        if type(selected) == "table" and selected.Title then
+            name = selected.Title
+        end
+        local ok, err = pcall(function()
+            ApplyTheme(tostring(name))
+        end)
+        if not ok then
+            warn("[Hub] Theme callback error:", err)
+            Notify("Theme", "Failed to apply theme", 3)
+        end
+    end,
+})
+
 -- Start core systems
 BallController:Start()
 
--- Character lifecycle safety
 Track("CharAdded", LocalPlayer.CharacterAdded:Connect(function()
     task.wait(0.4)
-    -- features that need rebinding already listen via their own CharacterAdded tracks
 end))
 
 Notify("Blade Ball Hub", "Loaded successfully", 3)
