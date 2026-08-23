@@ -1,252 +1,544 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="Black">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>BladeBallHub</title>
-    <meta
-      name="description"
-      content="A powerful and customizable Blade Ball Luau script hub built for performance, flexibility, and a clean user experience."
-    />
-    <meta name="theme-color" content="#0a0a0a" />
-    <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <header class="nav">
-      <div class="nav-inner">
-        <a class="brand" href="#home">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 16 16" fill="none">
-              <path d="M3 12.5 8 3.5l5 9M5.2 8.8h5.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          BladeBallHub
-        </a>
-        <nav class="nav-links" aria-label="Primary">
-          <a href="#home">Home</a>
-          <a href="#features">Features</a>
-          <a href="#themes">Themes</a>
-          <a href="#updates">Updates</a>
-          <a href="#github">GitHub</a>
-          <a href="#download">Download</a>
-        </nav>
-        <div class="nav-actions">
-          <a class="btn btn-primary nav-cta" data-link="download">Get BladeBallHub</a>
-          <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" id="menu-toggle">
-            <span class="sr-only">Open menu</span>
-            <span class="menu-icon" aria-hidden="true"></span>
-          </button>
-        </div>
-      </div>
-      <nav id="mobile-nav" class="mobile-nav" hidden aria-label="Mobile">
-        <a href="#home">Home</a>
+<html lang="en" data-theme="black">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BladeBallHub — Blade Ball Luau Hub</title>
+  <meta name="description" content="BladeBallHub is a customizable Blade Ball Luau hub with a modern WindUI interface and configurable features." />
+  <meta name="theme-color" content="#070708" />
+  <link rel="canonical" href="https://idebob.github.io/BladeBallHub/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://idebob.github.io/BladeBallHub/" />
+  <meta property="og:title" content="BladeBallHub — Blade Ball Luau Hub" />
+  <meta property="og:description" content="A modular, production-oriented Blade Ball Luau hub built with WindUI. Auto Parry, ESP, themes, and more." />
+  <meta property="og:site_name" content="BladeBallHub" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="BladeBallHub — Blade Ball Luau Hub" />
+  <meta name="twitter:description" content="A modular, production-oriented Blade Ball Luau hub built with WindUI." />
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#home" aria-label="BladeBallHub home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" width="16" height="16">
+            <path d="M3 12.5 8 3.5l5 9M5.2 8.8h5.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">BladeBallHub</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
         <a href="#features">Features</a>
         <a href="#themes">Themes</a>
         <a href="#updates">Updates</a>
-        <a href="#github">GitHub</a>
-        <a href="#download">Download</a>
-        <a class="btn btn-primary" data-link="download">Get BladeBallHub</a>
+        <a href="#github" data-link="github">GitHub</a>
       </nav>
-    </header>
+      <div class="nav-actions">
+        <a class="btn btn-primary nav-cta" href="#get-started">Get Started</a>
+        <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" id="menu-toggle" aria-label="Open menu">
+          <span class="menu-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <nav id="mobile-nav" class="mobile-nav" hidden aria-label="Mobile">
+      <a href="#features">Features</a>
+      <a href="#themes">Themes</a>
+      <a href="#updates">Updates</a>
+      <a href="#github" data-link="github">GitHub</a>
+      <a class="btn btn-primary" href="#get-started">Get Started</a>
+    </nav>
+  </header>
 
-    <main>
-      <section id="home" class="hero">
-        <div class="hero-glow" aria-hidden="true"></div>
-        <div class="hero-grid">
-          <div>
-            <p class="eyebrow">WindUI · Blade Ball</p>
-            <h1>BladeBallHub</h1>
-            <p class="lede">
-              A powerful and customizable Blade Ball Luau script hub built for
-              performance, flexibility, and a clean user experience.
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#download">Get Started</a>
-              <a class="btn btn-ghost" data-link="github">View on GitHub</a>
-            </div>
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-grid-lines"></div>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-copy">
+          <div class="status-badge">
+            <span class="status-dot" aria-hidden="true"></span>
+            Open Source · In Development
           </div>
-          <div class="mockup" data-mockup>
-            <div class="mockup-bar">
-              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <h1 class="hero-title">
+            <span class="hero-title-main">BladeBallHub</span>
+          </h1>
+          <p class="hero-lede">
+            A powerful Blade Ball Luau hub built around performance and control.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#get-started">Get Started</a>
+            <a class="btn btn-ghost" data-link="github">View GitHub</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="mockup hero-mockup" data-demo-root>
+            <div class="mockup-chrome">
+              <span class="mockup-dots" aria-hidden="true"><i></i><i></i><i></i></span>
               <div class="mockup-title">
                 <span class="brand-mark sm" aria-hidden="true">
-                  <svg viewBox="0 0 16 16" fill="none">
+                  <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
                     <path d="M3 12.5 8 3.5l5 9M5.2 8.8h5.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </span>
                 <div>
                   <strong>BladeBallHub</strong>
-                  <small>WindUI · Production</small>
+                  <small>WindUI</small>
                 </div>
               </div>
             </div>
-            <div class="mockup-body">
-              <div class="mockup-tabs" role="tablist" aria-label="Hub tabs">
-                <button type="button" class="is-active" data-tab="main" role="tab" aria-selected="true">Main</button>
-                <button type="button" data-tab="parry" role="tab" aria-selected="false">Parry</button>
-                <button type="button" data-tab="theme" role="tab" aria-selected="false">UI Theme / Color Changer</button>
+            <div class="mockup-layout">
+              <div class="mockup-sidebar" role="tablist" aria-label="Hub tabs">
+                <button type="button" class="mockup-tab is-active" data-tab="main" role="tab" aria-selected="true">Main</button>
+                <button type="button" class="mockup-tab" data-tab="parry" role="tab" aria-selected="false">Parry</button>
+                <button type="button" class="mockup-tab" data-tab="theme" role="tab" aria-selected="false">UI Theme</button>
               </div>
+              <div class="mockup-panels">
+                <div class="mockup-panel" data-panel="main">
+                  <p class="panel-label">Main</p>
+                  <div class="toggle-row" data-toggle>
+                    <span>Infinite Jump</span>
+                    <button type="button" class="switch on" role="switch" aria-checked="true" aria-label="Infinite Jump"></button>
+                  </div>
+                  <div class="toggle-row" data-toggle>
+                    <span>No Fog</span>
+                    <button type="button" class="switch on" role="switch" aria-checked="true" aria-label="No Fog"></button>
+                  </div>
+                  <div class="toggle-row" data-toggle>
+                    <span>Full Bright</span>
+                    <button type="button" class="switch" role="switch" aria-checked="false" aria-label="Full Bright"></button>
+                  </div>
+                  <div class="toggle-row" data-toggle>
+                    <span>Remove Jitter</span>
+                    <button type="button" class="switch" role="switch" aria-checked="false" aria-label="Remove Jitter"></button>
+                  </div>
+                  <div class="toggle-row" data-toggle>
+                    <span>ESP</span>
+                    <button type="button" class="switch on" role="switch" aria-checked="true" aria-label="ESP"></button>
+                  </div>
+                </div>
+                <div class="mockup-panel" data-panel="parry" hidden>
+                  <p class="panel-label">Parry</p>
+                  <div class="toggle-row" data-toggle>
+                    <span>Auto Parry</span>
+                    <button type="button" class="switch on" role="switch" aria-checked="true" aria-label="Auto Parry"></button>
+                  </div>
+                  <div class="toggle-row" data-toggle>
+                    <span>Auto Dash</span>
+                    <button type="button" class="switch" role="switch" aria-checked="false" aria-label="Auto Dash"></button>
+                  </div>
+                  <div class="toggle-row" data-toggle>
+                    <span>Ball Tracker</span>
+                    <button type="button" class="switch on" role="switch" aria-checked="true" aria-label="Ball Tracker"></button>
+                  </div>
+                  <div class="slider-row">
+                    <div class="slider-meta"><span>Parry Distance</span><span class="slider-val" data-slider-val>12</span></div>
+                    <input type="range" min="4" max="24" value="12" class="slider" aria-label="Parry Distance" data-slider />
+                  </div>
+                </div>
+                <div class="mockup-panel" data-panel="theme" hidden>
+                  <p class="panel-label">UI Theme / Color Changer</p>
+                  <div class="theme-select-demo">
+                    <label class="select-label" for="demo-theme">Select Theme</label>
+                    <select id="demo-theme" class="select" data-demo-theme aria-label="Select Theme">
+                      <option value="lavender">Lavender</option>
+                      <option value="purple">Purple</option>
+                      <option value="violet">Violet</option>
+                      <option value="white">White</option>
+                      <option value="black" selected>Black</option>
+                    </select>
+                  </div>
+                  <p class="demo-note">Demo only — does not control the in-game hub.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK INFO -->
+    <section class="quick-info" aria-label="Project facts">
+      <div class="quick-info-inner">
+        <div class="qi-item"><span class="qi-value">WindUI</span><span class="qi-label">Interface</span></div>
+        <div class="qi-item"><span class="qi-value">5</span><span class="qi-label">Themes</span></div>
+        <div class="qi-item"><span class="qi-value">Open Source</span><span class="qi-label">GitHub</span></div>
+        <div class="qi-item"><span class="qi-value">Luau</span><span class="qi-label">Runtime</span></div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="section">
+      <div class="section-head">
+        <h2>Everything You Need</h2>
+        <p class="section-sub">A focused collection of tools built into one streamlined interface.</p>
+      </div>
+      <div class="feature-bento">
+        <article class="feature-card feature-card--lg">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Auto Parry</h3>
+          <p>Velocity-based prediction with configurable distance, reaction time, and prediction strength.</p>
+          <span class="feature-arrow" aria-hidden="true">→</span>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <h3>ESP</h3>
+          <p>Player highlights, distance, and health overlays.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <h3>Full Bright</h3>
+          <p>Forced bright lighting with safe restore on disable.</p>
+        </article>
+        <article class="feature-card feature-card--wide">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Ball Speed Tracking</h3>
+          <p>Live overlay for speed, distance, approach state, and ETA — single source of truth via BallController.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+          </div>
+          <h3>Infinite Jump</h3>
+          <p>Event-driven jumps with respawn support.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <h3>Auto Dash</h3>
+          <p>Evasive dash with cooldown when the ball is a threat.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- MAIN / PARRY SHOWCASE -->
+    <section id="showcase" class="section section-alt">
+      <div class="section-head">
+        <h2>Core Systems</h2>
+        <p class="section-sub">Two focused areas — utilities and combat timing — isolated so one failure does not take down the rest.</p>
+      </div>
+      <div class="dual-panels">
+        <div class="dual-panel">
+          <div class="dual-panel-head">
+            <span class="dual-badge">Main</span>
+            <h3>Quality of Life</h3>
+          </div>
+          <ul class="feature-list">
+            <li><span class="fl-dot on"></span> Infinite Jump</li>
+            <li><span class="fl-dot on"></span> No Fog</li>
+            <li><span class="fl-dot"></span> Full Bright</li>
+            <li><span class="fl-dot"></span> Remove Jitter</li>
+            <li><span class="fl-dot on"></span> ESP</li>
+            <li><span class="fl-dot"></span> Debug Mode</li>
+          </ul>
+        </div>
+        <div class="dual-panel">
+          <div class="dual-panel-head">
+            <span class="dual-badge accent">Parry</span>
+            <h3>Combat Timing</h3>
+          </div>
+          <ul class="feature-list">
+            <li><span class="fl-dot on"></span> Auto Parry</li>
+            <li><span class="fl-dot"></span> Auto Dash</li>
+            <li><span class="fl-dot on"></span> Ball Tracker</li>
+            <li><span class="fl-meta">Distance · Reaction · Prediction</span></li>
+            <li><span class="fl-meta">Min speed · Max distance · Dash range</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- THEMES -->
+    <section id="themes" class="section">
+      <div class="section-head">
+        <h2>UI Theme / Color Changer</h2>
+        <p class="section-sub">Five carefully tuned palettes. Applied at runtime via WindUI — no UI rebuild, features stay intact.</p>
+      </div>
+      <div class="theme-grid" role="list">
+        <button type="button" class="theme-card" data-theme="lavender" aria-pressed="false">
+          <div class="theme-preview" data-preview="lavender">
+            <div class="tp-bar"></div>
+            <div class="tp-body">
+              <div class="tp-row"></div>
+              <div class="tp-row"></div>
+              <div class="tp-accent"></div>
+            </div>
+          </div>
+          <span class="theme-name">Lavender</span>
+        </button>
+        <button type="button" class="theme-card" data-theme="purple" aria-pressed="false">
+          <div class="theme-preview" data-preview="purple">
+            <div class="tp-bar"></div>
+            <div class="tp-body">
+              <div class="tp-row"></div>
+              <div class="tp-row"></div>
+              <div class="tp-accent"></div>
+            </div>
+          </div>
+          <span class="theme-name">Purple</span>
+        </button>
+        <button type="button" class="theme-card" data-theme="violet" aria-pressed="false">
+          <div class="theme-preview" data-preview="violet">
+            <div class="tp-bar"></div>
+            <div class="tp-body">
+              <div class="tp-row"></div>
+              <div class="tp-row"></div>
+              <div class="tp-accent"></div>
+            </div>
+          </div>
+          <span class="theme-name">Violet</span>
+        </button>
+        <button type="button" class="theme-card" data-theme="white" aria-pressed="false">
+          <div class="theme-preview" data-preview="white">
+            <div class="tp-bar"></div>
+            <div class="tp-body">
+              <div class="tp-row"></div>
+              <div class="tp-row"></div>
+              <div class="tp-accent"></div>
+            </div>
+          </div>
+          <span class="theme-name">White</span>
+        </button>
+        <button type="button" class="theme-card is-selected" data-theme="black" aria-pressed="true">
+          <div class="theme-preview" data-preview="black">
+            <div class="tp-bar"></div>
+            <div class="tp-body">
+              <div class="tp-row"></div>
+              <div class="tp-row"></div>
+              <div class="tp-accent"></div>
+            </div>
+          </div>
+          <span class="theme-name">Black</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE DEMO -->
+    <section id="demo" class="section section-alt">
+      <div class="section-head">
+        <h2>See It In Action</h2>
+        <p class="section-sub">Interactive mockup of the BladeBallHub UI. Switch tabs, toggle features, and try themes — demonstration only.</p>
+      </div>
+      <div class="demo-stage">
+        <div class="mockup demo-mockup" data-demo-root>
+          <div class="mockup-chrome">
+            <span class="mockup-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <strong>BladeBallHub</strong>
+          </div>
+          <div class="mockup-layout">
+            <div class="mockup-sidebar" role="tablist" aria-label="Demo hub tabs">
+              <button type="button" class="mockup-tab is-active" data-tab="main" role="tab" aria-selected="true">Main</button>
+              <button type="button" class="mockup-tab" data-tab="parry" role="tab" aria-selected="false">Parry</button>
+              <button type="button" class="mockup-tab" data-tab="theme" role="tab" aria-selected="false">UI Theme</button>
+            </div>
+            <div class="mockup-panels">
               <div class="mockup-panel" data-panel="main">
                 <p class="panel-label">Main</p>
-                <div class="toggle-row"><span>Infinite Jump</span><span class="switch on" aria-hidden="true"></span></div>
-                <div class="toggle-row"><span>No Fog</span><span class="switch on" aria-hidden="true"></span></div>
-                <div class="toggle-row"><span>Full Bright</span><span class="switch" aria-hidden="true"></span></div>
-                <div class="toggle-row"><span>Remove Jitter</span><span class="switch" aria-hidden="true"></span></div>
-                <div class="toggle-row"><span>ESP</span><span class="switch on" aria-hidden="true"></span></div>
+                <div class="toggle-row" data-toggle><span>Infinite Jump</span><button type="button" class="switch on" role="switch" aria-checked="true" aria-label="Infinite Jump"></button></div>
+                <div class="toggle-row" data-toggle><span>No Fog</span><button type="button" class="switch on" role="switch" aria-checked="true" aria-label="No Fog"></button></div>
+                <div class="toggle-row" data-toggle><span>Full Bright</span><button type="button" class="switch" role="switch" aria-checked="false" aria-label="Full Bright"></button></div>
+                <div class="toggle-row" data-toggle><span>Remove Jitter</span><button type="button" class="switch" role="switch" aria-checked="false" aria-label="Remove Jitter"></button></div>
+                <div class="toggle-row" data-toggle><span>ESP</span><button type="button" class="switch on" role="switch" aria-checked="true" aria-label="ESP"></button></div>
+                <div class="toggle-row" data-toggle><span>Debug Mode</span><button type="button" class="switch" role="switch" aria-checked="false" aria-label="Debug Mode"></button></div>
               </div>
               <div class="mockup-panel" data-panel="parry" hidden>
                 <p class="panel-label">Parry</p>
-                <div class="toggle-row"><span>Auto Parry</span><span class="switch on" aria-hidden="true"></span></div>
-                <div class="toggle-row"><span>Auto Dash</span><span class="switch" aria-hidden="true"></span></div>
-                <div class="toggle-row"><span>Ball Speed Tracker</span><span class="switch on" aria-hidden="true"></span></div>
+                <div class="toggle-row" data-toggle><span>Auto Parry</span><button type="button" class="switch on" role="switch" aria-checked="true" aria-label="Auto Parry"></button></div>
+                <div class="toggle-row" data-toggle><span>Auto Dash</span><button type="button" class="switch" role="switch" aria-checked="false" aria-label="Auto Dash"></button></div>
+                <div class="toggle-row" data-toggle><span>Ball Tracker</span><button type="button" class="switch on" role="switch" aria-checked="true" aria-label="Ball Tracker"></button></div>
+                <div class="slider-row">
+                  <div class="slider-meta"><span>Parry Distance</span><span class="slider-val" data-slider-val>12</span></div>
+                  <input type="range" min="4" max="24" value="12" class="slider" aria-label="Parry Distance" data-slider />
+                </div>
+                <div class="slider-row">
+                  <div class="slider-meta"><span>Prediction</span><span class="slider-val" data-slider-val>0.75</span></div>
+                  <input type="range" min="0" max="100" value="75" class="slider" aria-label="Prediction Strength" data-slider data-scale="0.01" />
+                </div>
               </div>
               <div class="mockup-panel" data-panel="theme" hidden>
                 <p class="panel-label">UI Theme / Color Changer</p>
-                <div class="theme-chip">
-                  <small>Select Theme</small>
-                  <strong data-theme-label>Theme: Black</strong>
+                <div class="theme-select-demo">
+                  <label class="select-label" for="demo-theme-2">Select Theme</label>
+                  <select id="demo-theme-2" class="select" data-demo-theme aria-label="Select Theme">
+                    <option value="lavender">Lavender</option>
+                    <option value="purple">Purple</option>
+                    <option value="violet">Violet</option>
+                    <option value="white">White</option>
+                    <option value="black" selected>Black</option>
+                  </select>
                 </div>
+                <p class="demo-note">Website demo only. In-game themes apply via WindUI:SetTheme.</p>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="stats" aria-label="Project facts">
-        <div class="stat"><strong>10+</strong><span>Features</span></div>
-        <div class="stat"><strong>5</strong><span>Themes</span></div>
-        <div class="stat"><strong>3</strong><span>UI Tabs</span></div>
-        <div class="stat"><strong>GitHub</strong><span>Open Source</span></div>
-      </section>
+    <!-- ENGINEERING -->
+    <section id="engineering" class="section">
+      <div class="section-head">
+        <h2>Engineering Philosophy</h2>
+        <p class="section-sub">Built for maintainability and resilience in executor environments.</p>
+      </div>
+      <div class="eng-grid">
+        <article class="eng-card">
+          <h3>Modular</h3>
+          <p>Features are separated into manageable systems with a centralized State and Config.</p>
+        </article>
+        <article class="eng-card">
+          <h3>Configurable</h3>
+          <p>Parry distance, reaction time, prediction strength, and dash parameters are adjustable.</p>
+        </article>
+        <article class="eng-card">
+          <h3>Responsive</h3>
+          <p>WindUI window designed for desktop and mobile executors.</p>
+        </article>
+        <article class="eng-card">
+          <h3>Defensive</h3>
+          <p>Feature isolation via pcall — one failure does not bring down the entire interface.</p>
+        </article>
+      </div>
+    </section>
 
-      <section id="features" class="section">
-        <h2>Powerful Features</h2>
-        <p class="section-copy">
-          Isolated systems, event-driven updates, and a WindUI window that stays
-          responsive on desktop and mobile executors.
-        </p>
-        <div class="feature-grid">
-          <article><h3>Infinite Jump</h3><p>Repeated jumping functionality with responsive character handling.</p></article>
-          <article><h3>No Fog</h3><p>Improves visibility by removing excessive environmental fog.</p></article>
-          <article><h3>Full Bright</h3><p>Provides a brighter environment for improved visibility.</p></article>
-          <article><h3>Remove Jitter</h3><p>Designed to reduce unnecessary visual jitter.</p></article>
-          <article><h3>ESP</h3><p>Provides additional visual information about relevant objects and players.</p></article>
-          <article><h3>Auto Parry</h3><p>Automatically analyzes the incoming ball and determines an appropriate parry timing.</p></article>
-          <article><h3>Auto Dash</h3><p>Automatically reacts to dangerous incoming situations with configurable movement behavior.</p></article>
-          <article><h3>Ball Speed Tracker</h3><p>Displays useful ball information such as speed, distance, and approach state.</p></article>
+    <!-- GITHUB -->
+    <section id="github" class="section section-alt">
+      <div class="github-cta">
+        <div class="github-cta-copy">
+          <h2>Built in Public</h2>
+          <p>Explore the source, follow development, report issues, and contribute through GitHub.</p>
+          <a class="btn btn-primary" data-link="github">View Repository →</a>
         </div>
-      </section>
-
-      <section id="themes" class="section alt">
-        <h2>Customize Your Hub</h2>
-        <p class="section-copy">Choose the visual style that fits your setup.</p>
-        <div class="theme-grid" role="list">
-          <button type="button" class="theme-card" data-theme="Lavender" aria-pressed="false">
-            <span class="swatches" aria-hidden="true"><i style="background:#1a1625"></i><i style="background:#c4b5fd"></i><i style="background:#f3e8ff"></i></span>
-            <span class="theme-name">Lavender</span>
-          </button>
-          <button type="button" class="theme-card" data-theme="Purple" aria-pressed="false">
-            <span class="swatches" aria-hidden="true"><i style="background:#160e24"></i><i style="background:#c084fc"></i><i style="background:#faf5ff"></i></span>
-            <span class="theme-name">Purple</span>
-          </button>
-          <button type="button" class="theme-card" data-theme="Violet" aria-pressed="false">
-            <span class="swatches" aria-hidden="true"><i style="background:#140e22"></i><i style="background:#8b5cf6"></i><i style="background:#ede9fe"></i></span>
-            <span class="theme-name">Violet</span>
-          </button>
-          <button type="button" class="theme-card" data-theme="White" aria-pressed="false">
-            <span class="swatches" aria-hidden="true"><i style="background:#ffffff"></i><i style="background:#27272a"></i><i style="background:#ececee"></i></span>
-            <span class="theme-name">White</span>
-          </button>
-          <button type="button" class="theme-card is-selected" data-theme="Black" aria-pressed="true">
-            <span class="swatches" aria-hidden="true"><i style="background:#0a0a0a"></i><i style="background:#e4e4e7"></i><i style="background:#16161a"></i></span>
-            <span class="theme-name">Black</span>
-          </button>
-        </div>
-      </section>
-
-      <section id="windui" class="section">
-        <h2>Built Around WindUI</h2>
-        <p class="section-copy">
-          A dark, glass-edged window with Main, Parry, and Theme tabs — the same
-          structure you get in the executor.
-        </p>
-        <div class="showcase">
-          <div class="mockup large">
-            <div class="mockup-bar">
-              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <strong>BladeBallHub</strong>
-            </div>
-            <pre class="showcase-pre" aria-label="Hub layout preview">MAIN
-  Infinite Jump       ON
-  No Fog              ON
-  Full Bright         OFF
-  Remove Jitter       OFF
-  ESP                 ON
-
-PARRY
-  Auto Parry          ON
-  Auto Dash           OFF
-  Ball Speed Tracker  ON
-
-UI THEME / COLOR CHANGER
-  Theme: <span data-theme-label>Purple</span></pre>
+        <div class="github-cta-meta">
+          <div class="gh-meta-item">
+            <span class="gh-meta-label">Repository</span>
+            <span class="gh-meta-value">ideBob/BladeBallHub</span>
+          </div>
+          <div class="gh-meta-item">
+            <span class="gh-meta-label">Stack</span>
+            <span class="gh-meta-value">Luau · WindUI</span>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="github" class="section alt">
-        <h2>Open Source & Development</h2>
-        <p class="section-copy">
-          Follow development, inspect the source, report issues, and contribute
-          through GitHub.
-        </p>
-        <a class="btn btn-primary" data-link="github">View GitHub Repository</a>
-      </section>
-
-      <section id="updates" class="section">
-        <h2>Latest Updates</h2>
-        <ol class="changelog">
-          <li>
-            <span class="ver">v1.1.0</span>
-            <div>
-              <h3>UI Theme / Color Changer</h3>
-              <p>Added a dedicated theme tab with Lavender, Purple, Violet, White, and Black palettes applied at runtime through WindUI.</p>
-            </div>
-          </li>
-          <li>
-            <span class="ver">v1.0.0</span>
-            <div>
-              <h3>Initial BladeBallHub release</h3>
-              <p>First public hub: Main utilities, Auto Parry, Auto Dash, Ball Tracker, ESP, and WindUI window.</p>
-            </div>
-          </li>
-        </ol>
-      </section>
-
-      <section id="download" class="section">
-        <div class="cta">
-          <h2>Ready to Get Started?</h2>
-          <p>Grab the hub source, read the feature notes, and run it in your executor of choice.</p>
-          <div class="hero-actions center">
-            <a class="btn btn-primary" data-link="download">Get BladeBallHub</a>
-            <a class="btn btn-ghost" data-link="docs">View Documentation</a>
+    <!-- CHANGELOG -->
+    <section id="updates" class="section">
+      <div class="section-head">
+        <h2>Changelog</h2>
+        <p class="section-sub">Release history from the project.</p>
+      </div>
+      <ol class="changelog">
+        <li>
+          <span class="ver">v1.1.0</span>
+          <div>
+            <h3>UI Theme System</h3>
+            <p>Added a dedicated theme tab with Lavender, Purple, Violet, White, and Black palettes applied at runtime through WindUI.</p>
           </div>
+        </li>
+        <li>
+          <span class="ver">v1.0.0</span>
+          <div>
+            <h3>Initial Release</h3>
+            <p>First public hub: Main utilities, Auto Parry, Auto Dash, Ball Tracker, ESP, and WindUI window.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- GETTING STARTED -->
+    <section id="get-started" class="section section-alt">
+      <div class="section-head">
+        <h2>Getting Started</h2>
+        <p class="section-sub">Four steps to run BladeBallHub in your executor.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <div>
+            <h3>Open the repository</h3>
+            <p>Visit <a data-link="github">ideBob/BladeBallHub</a> on GitHub.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <div>
+            <h3>Review the project</h3>
+            <p>Read the README and feature notes in <code>docs/</code>.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <div>
+            <h3>Follow the setup instructions</h3>
+            <p>Join Blade Ball, inject your preferred executor.</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">04</span>
+          <div>
+            <h3>Launch the hub</h3>
+            <p>Execute the contents of <code>src/BladeBallHub.lua</code>.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="steps-actions">
+        <a class="btn btn-primary" data-link="download">View Source</a>
+        <a class="btn btn-ghost" data-link="docs">Feature Docs</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+            <path d="M3 12.5 8 3.5l5 9M5.2 8.8h5.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <div>
+          <strong>BladeBallHub</strong>
+          <p>A Luau project for Blade Ball.</p>
         </div>
-      </section>
-    </main>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="#features">Features</a>
+          <a href="#themes">Themes</a>
+          <a href="#updates">Updates</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a data-link="github">GitHub</a>
+          <a data-link="docs">Documentation</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 BladeBallHub</p>
+      <p class="footer-disclaimer">Educational use. Roblox ToS applies. Use at your own risk.</p>
+    </div>
+  </footer>
 
-    <footer class="footer">
-      <p>BladeBallHub</p>
-      <p>Educational use. Roblox ToS applies.</p>
-    </footer>
-
-    <script src="js/script.js"></script>
-  </body>
+  <script src="js/script.js"></script>
+</body>
 </html>
