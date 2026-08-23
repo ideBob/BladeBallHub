@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <rect width="512" height="512" rx="64" fill="#05050A"/>
+  <circle cx="256" cy="200" r="72" fill="none" stroke="#7C3AED" stroke-width="8"/>
+  <circle cx="256" cy="200" r="28" fill="#22D3EE"/>
+  <text x="256" y="360" text-anchor="middle" font-family="system-ui,sans-serif" font-size="56" font-weight="800" fill="#E2E8F0">LONEWARE</text>
+  <text x="256" y="400" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" fill="#A78BFA">LW</text>
+</svg>
