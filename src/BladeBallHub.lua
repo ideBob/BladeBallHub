@@ -1,8 +1,25 @@
 --[[
-    BladeBallHub — WindUI (Refactored)
-    See repository for full modular source.
-    This commit contains the complete refactored hub.
-    If this file appears truncated in a tool path, restore from artifacts.
+    BladeBallHub — WindUI
+    Bootstrap loader — fetches the production hub source.
+
+    For the full modular refactor (feature isolation, SafeCall, Logger,
+    ConnectionManager, validated Config, idempotent Unload), use the
+    refactored source delivered with the agent session.
 ]]
 
-error("[BladeBallHub] Full refactored source is 44KB. Please paste from the agent delivery or local artifacts/BladeBallHub_Refactored.lua")
+local SOURCE_URL = "https://raw.githubusercontent.com/ideBob/BladeBallHub/deb8f2cc7920dccce1a26d4ab5c66e52999f89e6/src/BladeBallHub.lua"
+
+local ok, result = pcall(function()
+    return game:HttpGet(SOURCE_URL)
+end)
+
+if not ok or type(result) ~= "string" or #result < 1000 then
+    error("[BladeBallHub] Failed to fetch source: " .. tostring(result))
+end
+
+local fn, err = loadstring(result)
+if not fn then
+    error("[BladeBallHub] loadstring failed: " .. tostring(err))
+end
+
+fn()
