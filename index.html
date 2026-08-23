@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="Black">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BladeBallHub</title>
+    <meta
+      name="description"
+      content="A powerful and customizable Blade Ball Luau script hub built for performance, flexibility, and a clean user experience."
+    />
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="#home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none">
+              <path d="M3 12.5 8 3.5l5 9M5.2 8.8h5.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          BladeBallHub
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#themes">Themes</a>
+          <a href="#updates">Updates</a>
+          <a href="#github">GitHub</a>
+          <a href="#download">Download</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-primary nav-cta" data-link="download">Get BladeBallHub</a>
+          <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" id="menu-toggle">
+            <span class="sr-only">Open menu</span>
+            <span class="menu-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <nav id="mobile-nav" class="mobile-nav" hidden aria-label="Mobile">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#themes">Themes</a>
+        <a href="#updates">Updates</a>
+        <a href="#github">GitHub</a>
+        <a href="#download">Download</a>
+        <a class="btn btn-primary" data-link="download">Get BladeBallHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-grid">
+          <div>
+            <p class="eyebrow">WindUI · Blade Ball</p>
+            <h1>BladeBallHub</h1>
+            <p class="lede">
+              A powerful and customizable Blade Ball Luau script hub built for
+              performance, flexibility, and a clean user experience.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#download">Get Started</a>
+              <a class="btn btn-ghost" data-link="github">View on GitHub</a>
+            </div>
+          </div>
+          <div class="mockup" data-mockup>
+            <div class="mockup-bar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <div class="mockup-title">
+                <span class="brand-mark sm" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none">
+                    <path d="M3 12.5 8 3.5l5 9M5.2 8.8h5.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <div>
+                  <strong>BladeBallHub</strong>
+                  <small>WindUI · Production</small>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-tabs" role="tablist" aria-label="Hub tabs">
+                <button type="button" class="is-active" data-tab="main" role="tab" aria-selected="true">Main</button>
+                <button type="button" data-tab="parry" role="tab" aria-selected="false">Parry</button>
+                <button type="button" data-tab="theme" role="tab" aria-selected="false">UI Theme / Color Changer</button>
+              </div>
+              <div class="mockup-panel" data-panel="main">
+                <p class="panel-label">Main</p>
+                <div class="toggle-row"><span>Infinite Jump</span><span class="switch on" aria-hidden="true"></span></div>
+                <div class="toggle-row"><span>No Fog</span><span class="switch on" aria-hidden="true"></span></div>
+                <div class="toggle-row"><span>Full Bright</span><span class="switch" aria-hidden="true"></span></div>
+                <div class="toggle-row"><span>Remove Jitter</span><span class="switch" aria-hidden="true"></span></div>
+                <div class="toggle-row"><span>ESP</span><span class="switch on" aria-hidden="true"></span></div>
+              </div>
+              <div class="mockup-panel" data-panel="parry" hidden>
+                <p class="panel-label">Parry</p>
+                <div class="toggle-row"><span>Auto Parry</span><span class="switch on" aria-hidden="true"></span></div>
+                <div class="toggle-row"><span>Auto Dash</span><span class="switch" aria-hidden="true"></span></div>
+                <div class="toggle-row"><span>Ball Speed Tracker</span><span class="switch on" aria-hidden="true"></span></div>
+              </div>
+              <div class="mockup-panel" data-panel="theme" hidden>
+                <p class="panel-label">UI Theme / Color Changer</p>
+                <div class="theme-chip">
+                  <small>Select Theme</small>
+                  <strong data-theme-label>Theme: Black</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="Project facts">
+        <div class="stat"><strong>10+</strong><span>Features</span></div>
+        <div class="stat"><strong>5</strong><span>Themes</span></div>
+        <div class="stat"><strong>3</strong><span>UI Tabs</span></div>
+        <div class="stat"><strong>GitHub</strong><span>Open Source</span></div>
+      </section>
+
+      <section id="features" class="section">
+        <h2>Powerful Features</h2>
+        <p class="section-copy">
+          Isolated systems, event-driven updates, and a WindUI window that stays
+          responsive on desktop and mobile executors.
+        </p>
+        <div class="feature-grid">
+          <article><h3>Infinite Jump</h3><p>Repeated jumping functionality with responsive character handling.</p></article>
+          <article><h3>No Fog</h3><p>Improves visibility by removing excessive environmental fog.</p></article>
+          <article><h3>Full Bright</h3><p>Provides a brighter environment for improved visibility.</p></article>
+          <article><h3>Remove Jitter</h3><p>Designed to reduce unnecessary visual jitter.</p></article>
+          <article><h3>ESP</h3><p>Provides additional visual information about relevant objects and players.</p></article>
+          <article><h3>Auto Parry</h3><p>Automatically analyzes the incoming ball and determines an appropriate parry timing.</p></article>
+          <article><h3>Auto Dash</h3><p>Automatically reacts to dangerous incoming situations with configurable movement behavior.</p></article>
+          <article><h3>Ball Speed Tracker</h3><p>Displays useful ball information such as speed, distance, and approach state.</p></article>
+        </div>
+      </section>
+
+      <section id="themes" class="section alt">
+        <h2>Customize Your Hub</h2>
+        <p class="section-copy">Choose the visual style that fits your setup.</p>
+        <div class="theme-grid" role="list">
+          <button type="button" class="theme-card" data-theme="Lavender" aria-pressed="false">
+            <span class="swatches" aria-hidden="true"><i style="background:#1a1625"></i><i style="background:#c4b5fd"></i><i style="background:#f3e8ff"></i></span>
+            <span class="theme-name">Lavender</span>
+          </button>
+          <button type="button" class="theme-card" data-theme="Purple" aria-pressed="false">
+            <span class="swatches" aria-hidden="true"><i style="background:#160e24"></i><i style="background:#c084fc"></i><i style="background:#faf5ff"></i></span>
+            <span class="theme-name">Purple</span>
+          </button>
+          <button type="button" class="theme-card" data-theme="Violet" aria-pressed="false">
+            <span class="swatches" aria-hidden="true"><i style="background:#140e22"></i><i style="background:#8b5cf6"></i><i style="background:#ede9fe"></i></span>
+            <span class="theme-name">Violet</span>
+          </button>
+          <button type="button" class="theme-card" data-theme="White" aria-pressed="false">
+            <span class="swatches" aria-hidden="true"><i style="background:#ffffff"></i><i style="background:#27272a"></i><i style="background:#ececee"></i></span>
+            <span class="theme-name">White</span>
+          </button>
+          <button type="button" class="theme-card is-selected" data-theme="Black" aria-pressed="true">
+            <span class="swatches" aria-hidden="true"><i style="background:#0a0a0a"></i><i style="background:#e4e4e7"></i><i style="background:#16161a"></i></span>
+            <span class="theme-name">Black</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="windui" class="section">
+        <h2>Built Around WindUI</h2>
+        <p class="section-copy">
+          A dark, glass-edged window with Main, Parry, and Theme tabs — the same
+          structure you get in the executor.
+        </p>
+        <div class="showcase">
+          <div class="mockup large">
+            <div class="mockup-bar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <strong>BladeBallHub</strong>
+            </div>
+            <pre class="showcase-pre" aria-label="Hub layout preview">MAIN
+  Infinite Jump       ON
+  No Fog              ON
+  Full Bright         OFF
+  Remove Jitter       OFF
+  ESP                 ON
+
+PARRY
+  Auto Parry          ON
+  Auto Dash           OFF
+  Ball Speed Tracker  ON
+
+UI THEME / COLOR CHANGER
+  Theme: <span data-theme-label>Purple</span></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="github" class="section alt">
+        <h2>Open Source & Development</h2>
+        <p class="section-copy">
+          Follow development, inspect the source, report issues, and contribute
+          through GitHub.
+        </p>
+        <a class="btn btn-primary" data-link="github">View GitHub Repository</a>
+      </section>
+
+      <section id="updates" class="section">
+        <h2>Latest Updates</h2>
+        <ol class="changelog">
+          <li>
+            <span class="ver">v1.1.0</span>
+            <div>
+              <h3>UI Theme / Color Changer</h3>
+              <p>Added a dedicated theme tab with Lavender, Purple, Violet, White, and Black palettes applied at runtime through WindUI.</p>
+            </div>
+          </li>
+          <li>
+            <span class="ver">v1.0.0</span>
+            <div>
+              <h3>Initial BladeBallHub release</h3>
+              <p>First public hub: Main utilities, Auto Parry, Auto Dash, Ball Tracker, ESP, and WindUI window.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="download" class="section">
+        <div class="cta">
+          <h2>Ready to Get Started?</h2>
+          <p>Grab the hub source, read the feature notes, and run it in your executor of choice.</p>
+          <div class="hero-actions center">
+            <a class="btn btn-primary" data-link="download">Get BladeBallHub</a>
+            <a class="btn btn-ghost" data-link="docs">View Documentation</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>BladeBallHub</p>
+      <p>Educational use. Roblox ToS applies.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
