@@ -1,27 +1,29 @@
 --[[
     Blade Ball Hub — WindUI
     Full production Luau script
-    Architecture: centralized state, connection manager, ball controller,
-    feature isolation, capability detection, proper cleanup.
+
+    Bootstrap: loads the complete source from the last known-good commit.
+    Once the full file is restored on main, this can be replaced with the
+    inline source again.
+
     Themes: Lavender, Purple, Violet, White, Black (default Black)
 ]]
 
-local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local SOURCE_URL = "https://raw.githubusercontent.com/ideBob/BladeBallHub/deb8f2cc7920dccce1a26d4ab5c66e52999f89e6/src/BladeBallHub.lua"
 
---// Services
-local Players           = game:GetService("Players")
-local RunService        = game:GetService("RunService")
-local Lighting          = game:GetService("Lighting")
-local UserInputService  = game:GetService("UserInputService")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local VirtualInputManager = game:GetService("VirtualInputManager")
-local TweenService      = game:GetService("TweenService")
-local Workspace         = game:GetService("Workspace")
-local CoreGui           = game:GetService("CoreGui")
+local ok, result = pcall(function()
+    return game:HttpGet(SOURCE_URL)
+end)
 
-local LocalPlayer = Players.LocalPlayer
-local Camera      = Workspace.CurrentCamera
+if not ok or type(result) ~= "string" or #result < 1000 then
+    error("[BladeBallHub] Failed to fetch full source from " .. SOURCE_URL .. "\n" .. tostring(result))
+end
 
--- RESTORED FROM deb8f2cc — full source was truncated in this automated push attempt.
--- Please re-run restore or copy from: https://raw.githubusercontent.com/ideBob/BladeBallHub/deb8f2cc7920dccce1a26d4ab5c66e52999f89e6/src/BladeBallHub.lua
-error("[BladeBallHub] Partial restore. Download full file from commit deb8f2cc and replace this file.")
+-- The fetched file already contains its own WindUI load + full hub.
+-- Execute it in this environment.
+local fn, err = loadstring(result)
+if not fn then
+    error("[BladeBallHub] loadstring failed: " .. tostring(err))
+end
+
+fn()
