@@ -140,6 +140,7 @@ local function FindRealBall(folder)
             return child
         end
     end
+    -- fallback: any BasePart with velocity / target attribute
     for _, child in ipairs(folder:GetChildren()) do
         if child:IsA("BasePart") and (child:GetAttribute("target") ~= nil or child.AssemblyLinearVelocity.Magnitude > 5) then
             return child
@@ -215,6 +216,7 @@ local function PredictImpact(ballPos, ballVel, playerPos, playerVel, strength)
     local approaching = relativePos:Dot(relativeVel) < 0
     local timeToImpact = relativePos.Magnitude / speed
     if approaching then
+        -- more accurate projected time using closing speed
         local closing = -relativePos.Unit:Dot(relativeVel)
         if closing > 0.5 then
             timeToImpact = relativePos.Magnitude / closing
@@ -223,7 +225,7 @@ local function PredictImpact(ballPos, ballVel, playerPos, playerVel, strength)
     return relativePos.Magnitude, approaching, timeToImpact
 end
 
---// Parry Fire
+--// Parry Fire (multiple methods for compatibility)
 local lastParryTime = 0
 local function FireParry()
     local now = tick()
@@ -232,6 +234,7 @@ local function FireParry()
 
     local success = false
 
+    -- Method 1: Remote
     pcall(function()
         local remotes = ReplicatedStorage:FindFirstChild("Remotes")
         if remotes then
@@ -243,6 +246,7 @@ local function FireParry()
         end
     end)
 
+    -- Method 2: VirtualInput (mouse click)
     if not success then
         pcall(function()
             VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
@@ -256,6 +260,7 @@ local function FireParry()
 end
 
 --// Feature: Infinite Jump
+local jumpConn
 local function SetInfiniteJump(enabled)
     State.InfiniteJump = enabled
     Disconnect("InfiniteJump")
@@ -288,6 +293,7 @@ end
 
 --// Feature: No Fog
 local originalFog = {}
+local fogConn
 local function CaptureFog()
     originalFog = {
         FogEnd      = Lighting.FogEnd,
@@ -300,7 +306,6 @@ end
 local function SetNoFog(enabled)
     State.NoFog = enabled
     Disconnect("NoFog")
-    Disconnect("NoFog2")
     if not enabled then
         pcall(function()
             if originalFog.FogEnd then Lighting.FogEnd = originalFog.FogEnd end
@@ -375,7 +380,7 @@ local function SetFullBright(enabled)
     Notify("Full Bright", "Enabled")
 end
 
---// Feature: Remove Jitter
+--// Feature: Remove Jitter (lightweight camera stabilization)
 local function SetRemoveJitter(enabled)
     State.RemoveJitter = enabled
     Disconnect("RemoveJitter")
@@ -384,12 +389,14 @@ local function SetRemoveJitter(enabled)
         return
     end
 
+    -- Non-aggressive: only dampen extreme camera snaps, never force CFrame every frame
     local lastCF = Camera.CFrame
-    Track("RemoveJitter", RunService.RenderStepped:Connect(function()
+    Track("RemoveJitter", RunService.RenderStepped:Connect(function(dt)
         if not State.RemoveJitter then return end
         local current = Camera.CFrame
         local delta = (current.Position - lastCF.Position).Magnitude
         if delta > 8 and delta < 40 then
+            -- soft blend only on suspicious spikes
             Camera.CFrame = lastCF:Lerp(current, 0.55)
         end
         lastCF = Camera.CFrame
@@ -397,7 +404,7 @@ local function SetRemoveJitter(enabled)
     Notify("Remove Jitter", "Enabled")
 end
 
---// Feature: RakNet Desync
+--// Feature: RakNet Desync (experimental, capability-gated)
 local function SetRakNetDesync(enabled)
     State.RakNetDesync = enabled
     Disconnect("RakNetDesync")
@@ -413,6 +420,8 @@ local function SetRakNetDesync(enabled)
     end
 
     local ok, err = pcall(function()
+        -- Placeholder for executor-specific networking hooks.
+        -- Intentionally isolated; does nothing destructive if APIs are missing.
         Debug("RakNet Desync attempted (experimental)")
     end)
     if not ok then
@@ -428,7 +437,7 @@ local ESPFolder = Instance.new("Folder")
 ESPFolder.Name = "BladeBallESP"
 ESPFolder.Parent = CoreGui
 
-local espObjects = {}
+local espObjects = {} -- [player] = {highlight, billboard, ...}
 
 local function ClearESPFor(player)
     local data = espObjects[player]
@@ -576,8 +585,10 @@ local function AutoParryStep()
     if distance > Config.MaximumBallDistance then return end
     if not approaching then return end
 
+    -- Target check (common in Blade Ball)
     local target = ball:GetAttribute("target")
     if target and target ~= LocalPlayer.Name and target ~= LocalPlayer.DisplayName then
+        -- still allow if extremely close
         if distance > Config.ParryDistance * 0.6 then return end
     end
 
@@ -637,6 +648,7 @@ local function AutoDashStep()
     if eta > 0.45 then return end
 
     lastDash = now
+    -- Dash: apply impulse away from ball
     local away = (hrp.Position - ball.Position)
     if away.Magnitude < 0.1 then
         away = hrp.CFrame.LookVector
@@ -649,6 +661,7 @@ local function AutoDashStep()
         hrp.AssemblyLinearVelocity = dashDir * 55 + Vector3.new(0, 12, 0)
     end)
 
+    -- Also try common dash remote / ability if present
     pcall(function()
         local remotes = ReplicatedStorage:FindFirstChild("Remotes")
         if remotes then
@@ -692,6 +705,7 @@ local function SetBallTracker(enabled)
         return
     end
 
+    -- Simple CoreGui overlay for tracker (WindUI Paragraph is static; live values need custom)
     local screen = Instance.new("ScreenGui")
     screen.Name = "BallTrackerGui"
     screen.ResetOnSpawn = false
@@ -731,7 +745,7 @@ local function SetBallTracker(enabled)
     Track("BallTracker", RunService.Heartbeat:Connect(function()
         if not State.BallTracker then return end
         local now = tick()
-        if now - lastUpdate < 0.08 then return end
+        if now - lastUpdate < 0.08 then return end -- throttle UI
         lastUpdate = now
 
         local ball = BallController.CurrentBall
@@ -775,6 +789,7 @@ local function FullCleanup()
     ClearAllESP()
     pcall(function() ESPFolder:Destroy() end)
 
+    -- Restore lighting
     pcall(function()
         for k, v in pairs(originalLighting) do
             Lighting[k] = v
@@ -809,6 +824,7 @@ Window:OnDestroy(function()
     FullCleanup()
 end)
 
+-- Main Tab
 local MainTab = Window:Tab({
     Title = "Main",
     Icon  = "home",
@@ -884,6 +900,7 @@ MainTab:Toggle({
     end,
 })
 
+-- Parry Tab
 local ParryTab = Window:Tab({
     Title = "Parry",
     Icon  = "target",
@@ -997,10 +1014,13 @@ ParryTab:Slider({
     end,
 })
 
+-- Start core systems
 BallController:Start()
 
+-- Character lifecycle safety
 Track("CharAdded", LocalPlayer.CharacterAdded:Connect(function()
     task.wait(0.4)
+    -- features that need rebinding already listen via their own CharacterAdded tracks
 end))
 
 Notify("Blade Ball Hub", "Loaded successfully", 3)
